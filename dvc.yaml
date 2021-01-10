@@ -1,0 +1,16 @@
+stages:
+  clean:
+    cmd: python src/clean.py
+    deps:
+    - data/raw/resale-prices.csv
+    - src/clean.py
+    outs:
+    - data/interim/resale-prices-removed-duplicates.csv
+  split:
+    cmd: python src/split.py
+    deps:
+    - data/interim/resale-prices-removed-duplicates.csv
+    - src/split.py
+    outs:
+    - data/processed/resale-prices-test.csv
+    - data/processed/resale-prices-train.csv

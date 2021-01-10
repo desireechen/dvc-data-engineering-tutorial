@@ -1,0 +1,29 @@
+clean:
+  cmd: python src/clean.py
+  deps:
+  - path: data/raw/resale-prices.csv
+    md5: 13e400c6e39da7622196af5eec668aa1
+    size: 724124
+  - path: src/clean.py
+    md5: 480c67d9c73fb955b3aa6b316dc25802
+    size: 311
+  outs:
+  - path: data/interim/resale-prices-removed-duplicates.csv
+    md5: ef13c6a64d1af244f135c75859cf3809
+    size: 781311
+split:
+  cmd: python src/split.py
+  deps:
+  - path: data/interim/resale-prices-removed-duplicates.csv
+    md5: ef13c6a64d1af244f135c75859cf3809
+    size: 781311
+  - path: src/split.py
+    md5: 6556f2ef285afac0a0bc334cbdf2f700
+    size: 462
+  outs:
+  - path: data/processed/resale-prices-test.csv
+    md5: 2d763f090294a3b6849a995a314d9b45
+    size: 163885
+  - path: data/processed/resale-prices-train.csv
+    md5: 61f64423d966508a1f9928c4f9c4b675
+    size: 653341
