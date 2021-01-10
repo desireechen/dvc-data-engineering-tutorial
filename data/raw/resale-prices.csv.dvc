@@ -1,3 +1,4 @@
 outs:
-- md5: 13e400c6e39da7622196af5eec668aa1
+- md5: 231499b56ae684bb9fbf2f48f18c108f
   path: resale-prices.csv
+  size: 706883

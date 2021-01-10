@@ -1,0 +1,4 @@
+outs:
+- md5: 2cfee9d354760d044b561338e4fc5e40
+  size: 644738
+  path: resale-prices-train.csv
