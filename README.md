@@ -24,7 +24,7 @@ Create the interim (removed duplicates in raw dataset) and processed datasets (s
 `python src/clean.py` <br>
 `python src/split.py` <br>
 
-Push the changes to both Git and S3.
+Push the changes to both Git and S3. <br>
 `dvc add data/interim/resale-prices-removed-duplicates.csv` <br>
 `git add data/interim/resale-prices-removed-duplicates.csv.dvc data/interim/.gitignore` <br>
 `git commit -m "Removed duplicates"` <br>
