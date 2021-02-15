@@ -1,2 +1,3 @@
+!**/*.dvc
 /resale-prices-test.csv
 /resale-prices-train.csv
