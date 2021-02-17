@@ -6,7 +6,7 @@ The main branch is how it starts out after the raw dataset has been uploaded int
 
 This is what is in S3 bucket upon uploading the raw dataset. 
 
-![image](https://user-images.githubusercontent.com/51873343/104391898-e9654a80-557b-11eb-82dc-df4af6dc7f59.png)
+![image](https://user-images.githubusercontent.com/51873343/108140239-a3605100-70fc-11eb-9ced-ea6290ab3e07.png)
 
 The `.dvc` file corresponding to the raw dataset can be found in the `data/raw` folder.
 
