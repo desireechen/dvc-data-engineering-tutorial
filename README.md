@@ -26,4 +26,4 @@ dvc push
 
 S3 bucket shows the additional content related to the interim and processed datasets.
 
-![image](https://user-images.githubusercontent.com/51873343/104393811-4a8f1d00-5580-11eb-99f1-5c70cc4ce94c.png)
+![image](https://user-images.githubusercontent.com/51873343/108139811-d48c5180-70fb-11eb-8d2c-6825040ae23a.png)
