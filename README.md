@@ -38,9 +38,11 @@ Push the changes to both Git and S3.
 dvc add data/interim/resale-prices-removed-duplicates.csv
 git add data/interim/resale-prices-removed-duplicates.csv.dvc data/interim/.gitignore
 git commit -m "Removed duplicates"
+
 dvc add data/processed/*
 git add data/processed/resale-prices-train.csv.dvc data/processed/resale-prices-test.csv.dvc data/processed/.gitignore
 git commit -m "Split data into train and test"
+
 git push
 dvc push
 ```
