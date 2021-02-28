@@ -1,5 +1,7 @@
 # Using DVC with S3
 
+Video link: https://youtu.be/CGScyxphIp0
+
 This was created as a tutorial on how DVC has been integrated into GitLab projects. DVC remote storage `.dvc_cache` has been configured to be in S3.
 
 ### Summary of branches
