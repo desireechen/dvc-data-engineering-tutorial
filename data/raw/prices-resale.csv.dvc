@@ -1,3 +1,3 @@
 outs:
 - md5: 13e400c6e39da7622196af5eec668aa1
-  path: resale-prices.csv
+  path: prices-resale.csv
