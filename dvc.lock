@@ -1,29 +1,91 @@
-clean:
-  cmd: python src/clean.py
-  deps:
-  - path: data/raw/resale-prices.csv
-    md5: 13e400c6e39da7622196af5eec668aa1
-    size: 724124
-  - path: src/clean.py
-    md5: 480c67d9c73fb955b3aa6b316dc25802
-    size: 311
-  outs:
-  - path: data/interim/resale-prices-removed-duplicates.csv
-    md5: ef13c6a64d1af244f135c75859cf3809
-    size: 781311
-split:
-  cmd: python src/split.py
-  deps:
-  - path: data/interim/resale-prices-removed-duplicates.csv
-    md5: ef13c6a64d1af244f135c75859cf3809
-    size: 781311
-  - path: src/split.py
-    md5: 6556f2ef285afac0a0bc334cbdf2f700
-    size: 462
-  outs:
-  - path: data/processed/resale-prices-test.csv
-    md5: 2d763f090294a3b6849a995a314d9b45
-    size: 163885
-  - path: data/processed/resale-prices-train.csv
-    md5: 61f64423d966508a1f9928c4f9c4b675
-    size: 653341
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py data/raw/data.xml
+    deps:
+    - path: data/raw/data.xml
+      md5: a304afb96060aad90176268345e10355
+      size: 37891850
+    - path: src/prepare.py
+      md5: bd8bff3411e0a4f1ef5f6038525752e7
+      size: 1578
+    params:
+      params.yaml:
+        prepare.seed: 20170428
+        prepare.split: 0.2
+    outs:
+    - path: data/interim/test.tsv
+      md5: 6f597d341ceb7d8fbbe88859a892ef81
+      size: 4764380
+    - path: data/interim/train.tsv
+      md5: 32b715ef0d71ff4c9e61f55b09c15e75
+      size: 19096939
+  featurize:
+    cmd: python src/featurization.py data/interim data/processed
+    deps:
+    - path: data/interim/test.tsv
+      md5: 6f597d341ceb7d8fbbe88859a892ef81
+      size: 4764380
+    - path: data/interim/train.tsv
+      md5: 32b715ef0d71ff4c9e61f55b09c15e75
+      size: 19096939
+    - path: src/featurization.py
+      md5: 7e91f19d69cc6d3c19a0b033cb5a5833
+      size: 2481
+    params:
+      params.yaml:
+        featurize.max_features: 3000
+        featurize.ngrams: 2
+    outs:
+    - path: data/processed/test.pkl
+      md5: 614734fa9c2bddc206f8bddb61812c30
+      size: 2532025
+    - path: data/processed/train.pkl
+      md5: 490b3fc0802e563742051a2f13512b6d
+      size: 10198058
+  train:
+    cmd: python src/train.py data/processed model.pkl
+    deps:
+    - path: data/processed/test.pkl
+      md5: 614734fa9c2bddc206f8bddb61812c30
+      size: 2532025
+    - path: data/processed/train.pkl
+      md5: 490b3fc0802e563742051a2f13512b6d
+      size: 10198058
+    - path: src/train.py
+      md5: 89a0542803c884c65a71398bab21c258
+      size: 976
+    params:
+      params.yaml:
+        train.min_split: 64
+        train.n_est: 100
+        train.seed: 20170428
+    outs:
+    - path: model.pkl
+      md5: 2930cba1b85976b2c504826e814d6d2e
+      size: 2206859
+  evaluate:
+    cmd: python src/evaluate.py model.pkl data/processed scores.json prc.json roc.json
+    deps:
+    - path: data/processed/test.pkl
+      md5: 614734fa9c2bddc206f8bddb61812c30
+      size: 2532025
+    - path: data/processed/train.pkl
+      md5: 490b3fc0802e563742051a2f13512b6d
+      size: 10198058
+    - path: model.pkl
+      md5: 2930cba1b85976b2c504826e814d6d2e
+      size: 2206859
+    - path: src/evaluate.py
+      md5: d134b35ce9f060785cd7a68c5055d7b2
+      size: 1484
+    outs:
+    - path: prc.json
+      md5: 7d94110f135d22be1faf21ab7ccca51f
+      size: 675460
+    - path: roc.json
+      md5: 3155d9424a2ad181c2bb58f4d0ce7359
+      size: 55097
+    - path: scores.json
+      md5: 8f7ae54edbbe9a222b693bce8985cb80
+      size: 73
