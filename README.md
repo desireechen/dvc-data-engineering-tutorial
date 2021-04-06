@@ -4,6 +4,8 @@ With the release of DVC 2.0 in Mar 2021, I am updating this branch. DVC 2.0 prov
 
 The `pipeline` branch is where I used `dvc run` commands to create the DVC pipeline. The `dvc.yaml` and `dvc.lock` files contain the stages in the pipeline and the corresponding MD5 hashes of the dependencies and outputs of the particular stage.
 
+I had referenced the official DVC tutorial and made changes to the scripts such that the data is found in raw, interim and processed subfolders. There were changes made to the DVC commands below. 
+
 ```
 dvc run -n prepare \
         -p prepare.seed,prepare.split \
@@ -124,6 +126,9 @@ dvc exp gc --workspace
 dvc exp show -n 4 --no-timestamp --include-params train.n_est,train.min_split  --no-pager
 ```
 
-S3 bucket shows the additional content related to the interim and processed datasets.
+Summary of 4 experiments
+![image](https://user-images.githubusercontent.com/51873343/113694735-b78afc80-9702-11eb-929c-ba8cb3f9ac6a.png)
 
-![image](https://user-images.githubusercontent.com/51873343/108139811-d48c5180-70fb-11eb-8d2c-6825040ae23a.png)
+S3 bucket shows the additional content related to the experiments.
+
+![image](https://user-images.githubusercontent.com/51873343/113695321-4e57b900-9703-11eb-91ab-284cd3cf7c1b.png)
